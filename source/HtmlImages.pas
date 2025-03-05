@@ -349,6 +349,16 @@ var
   DefImage: ThtBitmapImage;
   ErrorImage: ThtBitmapImage;
 
+{ Try to recognize image type by reading the image header at Stream position.
+  Return image type or itNone if not recognized.
+
+  Do not reset stream position when done; this is left to the caller
+  which knows better how to interpret the results. }
+type
+  ThtImageFormat = (itNone, itBmp, itIco, itCur, itGif, itPng, itJpg, itTiff, itMeta);
+
+function KindOfImage(const Stream: TStream): ThtImageFormat;
+
 implementation
 
 var
@@ -380,13 +390,8 @@ type
 
 //------------------------------------------------------------------------------
 
-{ Try to recognize image type by reading the image header at Stream position.
-  Return image type or itNone if not recognized.
-
-  Do not reset stream position when done; this is left to the caller
-  which knows better how to interpret the results. }
-type
-  ThtImageFormat = (itNone, itBmp, itIco, itCur, itGif, itPng, itJpg, itTiff, itMeta);
+//type
+//  ThtImageFormat = (itNone, itBmp, itIco, itCur, itGif, itPng, itJpg, itTiff, itMeta);
 
 function KindOfImage(const Stream: TStream): ThtImageFormat;
 type
